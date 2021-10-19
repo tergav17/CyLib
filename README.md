@@ -7,7 +7,7 @@ This repository includes a number of libraries which allow for enhanced function
 - cymove.h: Provides advanced movement functions, including absolute turning and bumper driving. Dependent on imu.h and open_interface.h
 # uart.h
 This library includes very basic CyBot UART functionality. It is configured at 155200 baud, in order to use the WiFi module. It allows for the sending of individual characters or strings, and the recieving of characters. It also allows for interrupts, but the handler has no useful code at the moment. This UART library is minimual, as it is only really meant to provide commincation to the Cyrial Commander, thought it technically can be used with PuTTY too. In order to use the library, uart_init() needs to be called before any commands are used. If interrupts are to be used, uart_interrupt_init() must be called. The function descriptions are as follows:
-```
+```c
 void uart_init(void);
 
 /*
