@@ -162,7 +162,7 @@ cm_report cm_drive(double distance, char bump_stop) {
 
         if (fabs(err) > 40) {
             // If the error is too big, just run at full blast to reduce error fast
-            oi_setWheels((int16_t) (dir * 500), (int16_t) (dir * 500));
+            oi_setWheels((int16_t) (dir * 250), (int16_t) (dir * 250));
         } else if (fabs(err) > 10) {
             // Start to slow down
             oi_setWheels((int16_t) (err * 1), (int16_t) (err * 1));
@@ -171,7 +171,10 @@ cm_report cm_drive(double distance, char bump_stop) {
         }
 
         if (switch_cnt > 1 || (bump_stop && bump)) {
+            oi_setWheels((int16_t) (dir * -150), (int16_t) (dir * 150));
+            timer_waitMillis(50);
             oi_setWheels(0, 0);
+
             cont = 0;
         }
 
@@ -213,4 +216,16 @@ double cm_error(double pos, double goal) {
     double err = goal - pos;
 
     return err;
+}
+
+int cm_battery_charge(void) {
+    oi_update(cm_sensor_data);
+
+    return (int) cm_sensor_data->batteryCharge;
+}
+
+int cm_battery_voltage(void) {
+    oi_update(cm_sensor_data);
+
+    return (int) cm_sensor_data->batteryVoltage;
 }

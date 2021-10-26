@@ -12,6 +12,8 @@
 #include "open_interface.h"
 #include "math.h"
 
+#define THRESHOLD 1000
+
 oi_t *cm_sensor_data;
 double cm_cur_angle;
 
@@ -29,4 +31,9 @@ void cm_correct(double goal, char backtrack);
 
 double cm_error_rot(double pos);
 double cm_error(double pos, double goal);
+
+int cm_battery_charge(void);
+int cm_battery_voltage(void);
+
+
 #endif /* CYMOVE_H_ */
